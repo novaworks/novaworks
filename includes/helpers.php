@@ -576,7 +576,7 @@ if(!function_exists('nova_entry_meta_item_category_list')){
         if ( $categories_list ) {
             printf(
                 '%3$s<span class="screen-reader-text">%1$s </span><span>%2$s</span>%4$s',
-                esc_html_x('Posted in', 'front-view', 'irina'),
+                esc_html_x('Posted in', 'front-view', 'vedbo'),
                 str_replace('{{_}}', $separator, $categories_list),
                 $before,
                 $after
