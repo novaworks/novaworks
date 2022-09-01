@@ -1,11 +1,11 @@
 <?php
 	/**
 	 * Plugin Name: Novaworks
-	 * Plugin URI: https://novaworks.net/
-	 * Description: The plugin for Novaworks Themes
+	 * Plugin URI: https://irina.novaworks.net/
+	 * Description: The plugin for Irina Woocommerce WordPress Theme
 	 * Author: Novaworks
 	 * Author URI: https://novaworks.net
-	 * Version:          1.0.0
+	 * Version:          1.1
 	 * License:           GNU General Public License v2
 	 * License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 	 * Domain Path:       /languages
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'NOVA_VERSION', '1.0.0' );
+define( 'NOVA_VERSION', '1.1' );
 define( 'NOVA_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'NOVA_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
@@ -50,7 +50,6 @@ include_once( 'includes/mega-menu.php' );
 
 // Meta Boxes
 include_once( 'includes/extensions/metaboxes/page.php' );
-
 // Widgets
 function nova_load_widget() {
 		include_once( 'includes/widgets/nova-widget-recent-posts.php' );
