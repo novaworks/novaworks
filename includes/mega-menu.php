@@ -193,7 +193,22 @@ class Nova_Mega_Menu_Walker extends Walker_Nav_Menu {
 			$output .= "{$n}{$indent}<ul$class_names>{$n}";
 		}
 	}
+	/**
+	 * Render Icon HTML
+	 *
+	 * @param  string $icon Icon slug to render.
+	 * @return string
+	 */
+	public function get_dropdown_arrow_html( $icon = '' ) {
 
+		$format = apply_filters(
+			'kitify/nova-nav-menu/dropdown-arrow-format',
+			'<i class="kitify-nav-arrow %s"></i>',
+			$icon
+		);
+
+		return sprintf( $format, esc_attr( $icon ) );
+	}
 	/**
 	 * Ends the list of after the elements are added.
 	 *
@@ -245,9 +260,38 @@ class Nova_Mega_Menu_Walker extends Walker_Nav_Menu {
 		} elseif ( 1 == $depth ) {
 			$this->column_data = $item_mega;
 		}
-
 		if ( ! $this->in_mega ) {
-			$output .= parent::start_el( $output, $item, $depth, $args, $id );
+			$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
+			$class_names = $value = '';
+			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
+			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
+			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
+
+			$output .= $indent . '<li id="menu-item-'. $item->ID . '"' . $value . $class_names .'>';
+
+			$attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
+			$attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
+			$attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
+			$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
+			/** This filter is documented in wp-includes/post-template.php */
+			$title = apply_filters( 'the_title', $item->title, $item->ID );
+			$title_span = '<span>'.$title.'</span>';
+			if ( in_array( 'menu-item-has-children', $item->classes ) ) {
+				$arrow_icon = isset( $args->widget_settings['dropdown_icon'] ) ? $args->widget_settings['dropdown_icon'] : '';
+				if ( $arrow_icon ) {
+					$title_span = $title_span . $this->get_dropdown_arrow_html( $arrow_icon );
+				}
+			}
+			 $item_output = $args->before;
+			 $item_output .= '<a'. $attributes .'>';
+			 $item_output .= $args->link_before;
+			 $item_output .= $title_span;
+			 $item_output .= $args->link_after;
+			 $item_output .= '</a>';
+			 $item_output .= $args->after;
+
+			 $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+			//$output .= parent::start_el( $output, $item, $depth, $args, $id );
 			return;
 		}
 
@@ -409,10 +453,16 @@ class Nova_Mega_Menu_Walker extends Walker_Nav_Menu {
 		} else {
 			$link_close = '</a>';
 		}
-
+		$title_span = '<span>'.$title.'</span>';
+		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
+			$arrow_icon = isset( $args->widget_settings['dropdown_icon'] ) ? $args->widget_settings['dropdown_icon'] : '';
+			if ( $arrow_icon ) {
+				$title_span = $title_span . $this->get_dropdown_arrow_html( $arrow_icon );
+			}
+		}
 		$item_output = $args->before;
 		$item_output .= $link_open;
-		$item_output .= $args->link_before . $icon . $title . $args->link_after;
+		$item_output .= $args->link_before . $icon . $title_span . $args->link_after;
 		$item_output .= $link_close;
 		$item_output .= $args->after;
 
