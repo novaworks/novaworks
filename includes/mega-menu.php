@@ -643,6 +643,10 @@ class Nova_Mega_Menu_Walker extends Walker_Nav_Menu {
 		} elseif ( in_array( $this->mega_data['width'], array( 'container', 'container-fluid' ) ) ) {
 			$class[] = $this->mega_data['width'];
 			$attrs   = ' class="' . esc_attr( join( ' ', $class ) ) . '"';
+		} elseif ( 'container-nospace' == $this->mega_data['width'] ) {
+			$class[] = 'container';
+			$class[] = 'no-spacing';
+			$attrs   = ' class="' . esc_attr( join( ' ', $class ) ) . '"';
 		} else {
 			$class[] = 'container';
 			$attrs   = ' class="' . esc_attr( join( ' ', $class ) ) . '"';

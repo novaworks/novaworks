@@ -16,6 +16,7 @@
 				<select name="{{ novamm.getFieldName( 'width', data.data['menu-item-db-id'] ) }}">
 					<option value="container"><?php esc_html_e( 'Default', 'novaworks' ) ?></option>
 					<option value="container-fluid" {{ 'container-fluid' == data.megaData.width ? 'selected="selected"' : '' }}><?php esc_html_e( 'Fluid', 'novaworks' ) ?></option>
+					<option value="container-nospace" {{ 'container-nospace' == data.megaData.width ? 'selected="selected"' : '' }}><?php esc_html_e( 'No Spacing', 'novaworks' ) ?></option>
 					<option value="custom" {{ 'custom' == data.megaData.width ? 'selected="selected"' : '' }}><?php esc_html_e( 'Custom', 'novaworks' ) ?></option>
 				</select>
 			</label>
