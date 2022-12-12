@@ -5,7 +5,7 @@
 	 * Description: The plugin for Irina Woocommerce WordPress Theme
 	 * Author: Novaworks
 	 * Author URI: https://novaworks.net
-	 * Version:          2.0
+	 * Version:          2.0.1
 	 * License:           GNU General Public License v2
 	 * License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 	 * Domain Path:       /languages
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'NOVA_VERSION', '1.1' );
+define( 'NOVA_VERSION', '2.0.1' );
 define( 'NOVA_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'NOVA_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
